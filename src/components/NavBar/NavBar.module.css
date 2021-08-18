@@ -1,0 +1,148 @@
+.navbar {
+  height: 7.7rem;
+  position: sticky;
+  top: 0;
+  background-color: var(--color-primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brandText {
+  color: var(--color-text-normal);
+  font-weight: 700;
+}
+
+.search {
+  display: flex;
+  height: 3rem;
+}
+
+.inputWrapper {
+  display: flex;
+  width: 16rem;
+  position: relative;
+}
+
+.input {
+  width: 0;
+  flex: 1;
+  border: none;
+  border: 1px solid var(--color-secondary);
+  border-radius: 4px 0 0 4px;
+  background-color: var(--color-secondary);
+  padding: 0 0.8rem;
+  color: var(--color-text-light);
+}
+
+.input:focus {
+  color: var(--color-text-normalI);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary-contrast);
+}
+
+.results {
+  position: absolute;
+  /* z-index: var(--stack-before-last); */
+  top: 3.6rem;
+  width: 24rem;
+  left: 0;
+  background-color: var(--color-secondary);
+  padding: 0.8rem 0;
+  border-radius: 4px;
+  min-height: 4rem;
+}
+
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin-top: 3px;
+}
+
+.resultItem {
+  padding: 0.8rem;
+  transition: background-color 100ms, color 100ms;
+  color: var(--color-text-light);
+  border-radius: 4px;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.resultItem:hover {
+  cursor: pointer;
+  background-color: var(--color-primary-contrast);
+  color: var(--color-text-normal);
+}
+
+.inputButton {
+  display: flex;
+  align-items: center;
+  padding-left: 0.4rem;
+  background-color: var(--color-input-dropdown);
+  border-radius: 0 4px 4px 0;
+  position: relative;
+}
+
+.inputButton:hover {
+  cursor: pointer;
+}
+
+.buttonText {
+  width: 6rem;
+  color: var(--color-text-light);
+}
+
+.searchIcon {
+  display: flex;
+  align-items: center;
+  margin-right: 0.4rem;
+}
+
+.searchTypeList {
+  position: absolute;
+  top: 3.4rem;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-secondary);
+  padding: 0.8rem 0;
+  border-radius: 4px;
+}
+.searchType {
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  color: var(--color-text-light);
+  transition: background-color 100ms, color 100ms;
+}
+
+.searchType:hover {
+  cursor: pointer;
+  background-color: var(--color-primary-contrast);
+  color: var(--color-text-normal);
+}
+
+@media screen and (max-width: 420px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 0.4rem;
+  }
+  .brand {
+    justify-content: space-around;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  .searchWrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+}

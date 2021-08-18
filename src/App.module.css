@@ -1,0 +1,12 @@
+.app {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--color-primary);
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  box-shadow: var(--shadow-navbar);
+  z-index: var(--stack-5);
+}
