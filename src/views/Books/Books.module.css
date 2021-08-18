@@ -1,0 +1,116 @@
+.books {
+  margin-top: 7.2rem;
+}
+
+.header {
+  margin-bottom: 6.4rem;
+}
+
+.bookTitle {
+  color: var(--color-primary-contrast);
+}
+
+.descriptionWrapper {
+  display: flex;
+  margin-bottom: 5.6rem;
+}
+
+.left {
+  flex: 0 0 16rem;
+}
+
+.right {
+  padding: 1.6rem;
+  flex: 1;
+  padding-top: 0;
+}
+
+.coverWrapper {
+  width: 100%;
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: var(--shadow-elements);
+  margin-bottom: 1.6rem;
+  overflow: hidden;
+}
+
+.cover {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 0.8rem;
+}
+
+.descriptionTitle,
+.itemLabel {
+  margin-bottom: 0.4rem;
+}
+
+.descriptionTitleText,
+.itemLabelText {
+  font-weight: 700;
+}
+
+.itemValue {
+  margin-left: 1.6rem;
+}
+
+.authorItem:not(:last-child) {
+  margin-bottom: 0.2rem;
+}
+
+.descriptionTitle {
+  margin-bottom: 1.6rem;
+}
+
+.valueWrapper {
+  padding: 1.2rem 1.6rem;
+  padding-right: 0;
+  background-color: var(--color-secondary);
+  height: 25rem;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.descriptionValue {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 0.2rem 0;
+  padding-right: 1rem;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+}
+
+.linksHeader {
+  margin-bottom: 1.6rem;
+}
+
+.linkItem {
+  color: var(--color-primary-contrast);
+  text-decoration: none;
+}
+
+.linkItem:hover {
+  text-decoration: underline;
+}
+
+.linkItem:active {
+  color: var(--color-text-normal);
+}
+
+.linksItem:visited {
+  color: var(--color-text-light);
+}
+
+.linkItem:not(:last-child) {
+  margin-bottom: 0.8rem;
+}

@@ -9,6 +9,7 @@ import { useClickAway } from 'react-use';
 import { useRef } from 'react';
 import useFetchData from '../../modules/useFetchData';
 import Spinner from '../Spinner/Spinner';
+import { Link } from 'react-router-dom';
 
 export interface INavBarProps {
   handleClick?: (item: IResultItem) => any;
@@ -230,7 +231,9 @@ const NavBar: React.FC<INavBarProps> = props => {
     <div className={styles.navbar}>
       <div className={styles.brand}>
         <Body1>
-          <div className={styles.brandText}>TheBookFinder</div>
+          <Link to="/" className={styles.brandText}>
+            TheBookFinder
+          </Link>
         </Body1>
       </div>
 

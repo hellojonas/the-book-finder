@@ -11,6 +11,7 @@
 .brandText {
   color: var(--color-text-normal);
   font-weight: 700;
+  text-decoration: none;
 }
 
 .search {
