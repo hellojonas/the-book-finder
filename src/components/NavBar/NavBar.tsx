@@ -118,12 +118,13 @@ export const SearchInput = ({ handleClick }: ISeachInputProps) => {
   const handleSelect = (e: MouseEvent<HTMLDivElement>, sType: searchType) => {
     setSearch(sType);
     setSelect(false);
+    setResults(undefined);
     e.stopPropagation();
   };
 
   const handleInput = (e: FormEvent<HTMLInputElement>) => {
     setValue((e.target as HTMLInputElement).value);
-    if (value.length < 4) {
+    if (value.length < 3) {
       lastTimeout && clearTimeout(lastTimeout as number);
       return;
     }
@@ -146,7 +147,7 @@ export const SearchInput = ({ handleClick }: ISeachInputProps) => {
             .replaceAll(/\s/g, '+')}`
         );
       }
-    }, 3000);
+    }, 1000);
 
     setLastTimeout(timeout);
   };
