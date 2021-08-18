@@ -53,16 +53,23 @@
   background-color: var(--color-secondary);
   padding: 0.8rem 0;
   border-radius: 4px;
-  min-height: 4rem;
+  min-height: 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.empty {
+.message {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 100%;
-  margin-top: 3px;
+}
+
+.messageText {
+  color: var(--color-text-light);
+  font-style: italic;
+  display: flex;
+  align-items: center;
 }
 
 .resultItem {

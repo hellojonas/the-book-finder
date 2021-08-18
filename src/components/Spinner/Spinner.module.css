@@ -1,0 +1,25 @@
+.spinner {
+  position: relative;
+  height: 1em;
+  width: 1em;
+}
+
+.spinner div {
+  height: 100%;
+  width: 100%;
+  border: 5px solid transparent;
+  border-top-color: var(--color-primary-contrast);
+  border-right-color: var(--color-primary-contrast);
+  border-bottom-color: var(--color-primary-contrast);
+  border-radius: 50%;
+  animation: spinnerRotate 1s linear infinite;
+}
+
+@keyframes spinnerRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

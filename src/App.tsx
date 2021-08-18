@@ -14,13 +14,11 @@ function App() {
         </Container>
       </div>
 
-      <Container>
-        <Switch>
-          <Route path="/" exact>
-            <Home />
-          </Route>
-        </Switch>
-      </Container>
+      <Switch>
+        <Route path="/" exact>
+          <Home />
+        </Route>
+      </Switch>
     </div>
   );
 }

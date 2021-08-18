@@ -1,4 +1,4 @@
-import React, { FormEvent, MouseEvent } from 'react';
+import React, { FormEvent, MouseEvent, ReactNode } from 'react';
 import { useState } from 'react';
 import styles from './NavBar.module.css';
 import { MdExpandLess, MdExpandMore } from 'react-icons/md';
@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useClickAway } from 'react-use';
 import { useRef } from 'react';
 import useFetchData from '../../modules/useFetchData';
+import Spinner from '../Spinner/Spinner';
 
 export interface INavBarProps {
   handleClick?: (item: IResultItem) => any;
@@ -18,6 +19,7 @@ export interface ISeachInputProps {
 }
 
 export type searchType = 'Book' | 'Author';
+
 export interface IResultItem {
   text: {
     type: searchType;
@@ -25,6 +27,69 @@ export interface IResultItem {
   };
   key: string;
 }
+
+export interface ISearchResults {
+  handleClick?: (item: IResultItem) => any;
+  results?: IAuthorSearchResult | IBookSearchResult;
+  type: searchType;
+  loading?: boolean;
+}
+
+export const ResultMessage = (props: { children?: ReactNode }) => {
+  return (
+    <div className={styles.message}>
+      <Body2>
+        <span className={styles.messageText}>{props.children}</span>
+      </Body2>
+    </div>
+  );
+};
+
+export const SearchResults = ({
+  handleClick,
+  results,
+  type,
+  loading,
+}: ISearchResults) => {
+  const resultList = results?.docs.map(res => {
+    const item: IResultItem = {
+      key: res.key,
+      text: { type, value: 'title' in res ? res.title : res.name },
+    };
+    return (
+      <div
+        key={res.key}
+        onClick={() => {
+          handleClick && handleClick(item);
+        }}
+      >
+        <Body2>
+          <div className={styles.resultItem}>
+            {'title' in res ? res.title : res.name}
+          </div>
+        </Body2>
+      </div>
+    );
+  });
+
+  let show;
+
+  if (results?.docs.length === 0 && !loading) {
+    show = <ResultMessage>{`No ${type} Found.`}</ResultMessage>;
+  } else if (loading) {
+    show = (
+      <ResultMessage>
+        <Spinner />
+      </ResultMessage>
+    );
+  } else if (!loading && !results) {
+    show = <ResultMessage>type at least 4 characters</ResultMessage>;
+  } else if (!loading && results && results?.docs.length > 0) {
+    show = resultList;
+  }
+
+  return <div className={styles.results}>{show}</div>;
+};
 
 export const SearchInput = ({ handleClick }: ISeachInputProps) => {
   const [search, setSearch] = useState<searchType>('Book');
@@ -99,37 +164,19 @@ export const SearchInput = ({ handleClick }: ISeachInputProps) => {
       setSuggest(true);
     } else if (value.length === 0) {
       setResults(undefined);
+      setSuggest(false);
     } else {
       setSuggest(false);
     }
   }, [focus, value]);
 
-  const { data } = useFetchData<IAuthorSearchResult | IBookSearchResult>(url);
+  const { data, loading } = useFetchData<
+    IAuthorSearchResult | IBookSearchResult
+  >(url);
 
   useEffect(() => {
     setResults(data);
   }, [data]);
-
-  const resultList = results?.docs.map(res => {
-    const item: IResultItem = {
-      key: res.key,
-      text: { type: search, value: 'title' in res ? res.title : res.name },
-    };
-    return (
-      <div
-        key={res.key}
-        onClick={() => {
-          _handleClick(item);
-        }}
-      >
-        <Body2>
-          <div className={styles.resultItem}>
-            {'title' in res ? res.title : res.name}
-          </div>
-        </Body2>
-      </div>
-    );
-  });
 
   return (
     <div className={styles.search}>
@@ -142,7 +189,14 @@ export const SearchInput = ({ handleClick }: ISeachInputProps) => {
           onFocus={handleFocus}
           onInput={handleInput}
         />
-        {suggest && <div className={styles.results}>{resultList}</div>}
+        {suggest && (
+          <SearchResults
+            handleClick={_handleClick}
+            type={search}
+            results={results}
+            loading={loading}
+          />
+        )}
       </div>
       <div className={styles.inputButton} onClick={() => setSelect(!select)}>
         <div className={styles.buttonText}>{search}</div>
@@ -178,6 +232,7 @@ const NavBar: React.FC<INavBarProps> = props => {
           <div className={styles.brandText}>TheBookFinder</div>
         </Body1>
       </div>
+
       <div className={styles.searchWrapper}>
         <SearchInput handleClick={props.handleClick} />
       </div>
