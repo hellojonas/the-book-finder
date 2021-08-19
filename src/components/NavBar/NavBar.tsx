@@ -137,18 +137,22 @@ export const SearchInput = ({ handleClick }: ISeachInputProps) => {
     const timeout = setTimeout(() => {
       if (search === 'Book') {
         setUrl(
-          `${process.env.REACT_APP_OL_API}/search.json?&limit=5&title=${value
+          `${
+            process.env.REACT_APP_OL_API
+          }/search.json?&limit=5&title=${encodeURIComponent(value)
             .replaceAll(/\\/g, '')
             .replaceAll(/\s/g, '+')}`
         );
       } else {
         setUrl(
-          `${process.env.REACT_APP_OL_API}/search/authors.json?limit=5&q=${value
+          `${
+            process.env.REACT_APP_OL_API
+          }/search/authors.json?limit=5&q=${encodeURIComponent(value)
             .replaceAll(/\\/g, '')
             .replaceAll(/\s/g, '+')}`
         );
       }
-    }, 1000);
+    }, 200);
 
     setLastTimeout(timeout);
   };
