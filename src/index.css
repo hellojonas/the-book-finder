@@ -45,3 +45,15 @@ body {
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
+
+@media screen and (max-width: 640px) {
+  html {
+    font-size: 50%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 55%;
+  }
+}
