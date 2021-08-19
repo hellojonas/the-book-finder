@@ -7,6 +7,7 @@ import NavBar, { IResultItem } from './components/NavBar/NavBar';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import Books from './views/Books/Books';
+import Author from './views/Author/Authors';
 
 function App() {
   const [item, setItem] = useState<IResultItem>();
@@ -41,6 +42,9 @@ function App() {
         </Route>
         <Route path="/books/:id">
           <Books />
+        </Route>
+        <Route path="/authors/:id">
+          <Author />
         </Route>
       </Switch>
     </div>

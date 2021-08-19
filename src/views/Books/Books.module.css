@@ -17,6 +17,7 @@
 
 .left {
   flex: 0 0 16rem;
+  margin-right: 2.4rem;
 }
 
 .right {
@@ -26,7 +27,7 @@
 }
 
 .coverWrapper {
-  width: 100%;
+  max-width: 16rem;
   width: 100%;
   border-radius: 4px;
   box-shadow: var(--shadow-elements);
@@ -78,7 +79,7 @@
 .descriptionValue {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   height: 100%;
   overflow-y: scroll;
   padding: 0.2rem 0;
@@ -113,4 +114,26 @@
 
 .linkItem:not(:last-child) {
   margin-bottom: 0.8rem;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4rem;
+}
+
+@media screen and (max-width: 640px) {
+  .descriptionWrapper {
+    flex-direction: column;
+  }
+  .left {
+    margin-bottom: 2.4rem;
+    margin-right: 0;
+  }
+  .right {
+    margin-left: 0;
+    padding: 0;
+  }
 }

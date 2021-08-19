@@ -14,11 +14,15 @@ export interface IAuthors {
 
 export const useFetchAuthors = (authors?: IAuthors[]) => {
   const [_authors, setAuthors] = useState<IAuthorResult[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error>();
 
   useEffect(() => {
     if (!authors) {
       return;
     }
+
+    setLoading(true);
 
     const authorPromises = authors.map(author => {
       return axios.get<IAuthorResult>(
@@ -39,12 +43,14 @@ export const useFetchAuthors = (authors?: IAuthors[]) => {
         });
 
         setAuthors(authorsArray);
+        setLoading(false);
       })
       .catch(err => {
-        console.log(err);
+        setError(err);
+        setLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authors]);
 
-  return { authors: _authors };
+  return { authors: _authors, loading, error };
 };

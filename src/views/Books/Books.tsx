@@ -1,6 +1,8 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router';
 import Container from '../../components/Container/Container';
+import Spinner from '../../components/Spinner/Spinner';
 import {
   Body1,
   Body2,
@@ -97,11 +99,12 @@ export const Cover = (props: { url: string }) => {
 };
 
 const Books: React.FC<IBooksProps> = props => {
+  const [loading, setLoading] = useState(false);
   const params = useParams<{ id: string }>();
   const url = `${process.env.REACT_APP_OL_API}/works/${params.id}.json`;
 
-  const { data: book } = useFetchData<IBookResult>(url);
-  const { authors } = useFetchAuthors(book?.authors);
+  const { data: book, loading: loadingBooks } = useFetchData<IBookResult>(url);
+  const { authors, loading: loadingAuthors } = useFetchAuthors(book?.authors);
 
   const authorsList = authors?.map(author => {
     return (
@@ -111,7 +114,11 @@ const Books: React.FC<IBooksProps> = props => {
     );
   });
 
-  return (
+  useEffect(() => {
+    setLoading(loadingBooks || loadingAuthors);
+  }, [loadingAuthors, loadingBooks]);
+
+  return !loading ? (
     <Container>
       <div className={styles.books}>
         <header className={styles.header}>
@@ -145,11 +152,17 @@ const Books: React.FC<IBooksProps> = props => {
           </div>
         </div>
 
-        <section>
-          <UsefulLinks links={book?.links} />
-        </section>
+        {book?.links && (
+          <section>
+            <UsefulLinks links={book?.links} />
+          </section>
+        )}
       </div>
     </Container>
+  ) : (
+    <div className={styles.spinner}>
+      <Spinner></Spinner>
+    </div>
   );
 };
 
